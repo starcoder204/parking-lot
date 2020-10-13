@@ -16,7 +16,7 @@ export const contacts = [
     'web': 'http://www.essievaill.com',
     'followers': 3574,
     'created_at': '20.10.2020',
-    'commission': 1,
+    'commission': 0,
     'image_signs': 1,
     'proofed': 1,
     'lot_status_admin': 1,
@@ -110,7 +110,7 @@ export const contacts = [
     'created_at': '20.10.2020',
     'commission': 1,
     'image_signs': 0,
-    'proofed': 1,
+    'proofed': 0,
     'lot_status_admin': 1,
     'lot_status_user': 1
   },
@@ -131,9 +131,9 @@ export const contacts = [
     'web': 'http://www.bernardlaboy.com',
     'followers': 6891,
     'created_at': '20.10.2020',
-    'commission': 1,
-    'image_signs': 0,
-    'proofed': 1,
+    'commission': 0,
+    'image_signs': 1,
+    'proofed': 0,
     'lot_status_admin': 1,
     'lot_status_user': 1
   },
@@ -154,9 +154,9 @@ export const contacts = [
     'web': 'http://www.suehaakinson.com',
     'followers': 5787,
     'created_at': '20.10.2020',
-    'commission': 1,
+    'commission': 0,
     'image_signs': 1,
-    'proofed': 1,
+    'proofed': 0,
     'lot_status_admin': 1,
     'lot_status_user': 1
   },
@@ -271,7 +271,7 @@ export const contacts = [
     'created_at': '20.10.2020',
     'commission': 1,
     'image_signs': 1,
-    'proofed': 1,
+    'proofed': 0,
     'lot_status_admin': 0,
     'lot_status_user': 1
   },
@@ -340,7 +340,7 @@ export const contacts = [
     'created_at': '20.10.2020',
     'commission': 1,
     'image_signs': 1,
-    'proofed': 1,
+    'proofed': 0,
     'lot_status_admin': 1,
     'lot_status_user': 0
   }

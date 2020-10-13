@@ -57,9 +57,9 @@ const router = new Router({
             breadcrumb: [
               { title: 'Unproofed', url: '/' },
               { title: 'Setups' },
-              { title: 'Add Parking Lot', active: true }
+              { title: 'Parking Lot', active: true }
             ],
-            pageTitle: 'Add Parking Log',
+            pageTitle: 'Unproofed',
             rule: 'editor'
           }
         },
@@ -73,7 +73,21 @@ const router = new Router({
               { title: 'Setups' },
               { title: 'Parking Lot', active: true }
             ],
-            pageTitle: 'Parking Log',
+            pageTitle: 'Commission Proof',
+            rule: 'editor'
+          }
+        },
+        {
+          path: '/addlot',
+          name: 'addlot',
+          component: () => import('./views/pages/AddLot.vue'),
+          meta: {
+            breadcrumb: [
+              { title: 'Commission Proof', url: '/' },
+              { title: 'Setups' },
+              { title: 'Add Parking Lot', active: true }
+            ],
+            pageTitle: 'Add Parking Log',
             rule: 'editor'
           }
         }

@@ -66,7 +66,7 @@
                 <vx-breadcrumb class="ml-4 md:block hidden" v-if="$route.meta.breadcrumb" :route="$route" :isRTL="$vs.rtl" />
 
                 <!-- DROPDOWN -->
-                <vs-button color="primary" type="filled" class="ml-auto md:block hidden cursor-pointer" size="small">Parkplatz manuell hinzufugen</vs-button>
+                <vs-button color="primary" type="filled" @click="addParkingLot" class="ml-auto md:block hidden cursor-pointer">add parking lot</vs-button>
 
               </div>
             </transition>
@@ -182,6 +182,9 @@ export default {
       } else {
         this.$store.commit('TOGGLE_IS_VERTICAL_NAV_MENU_ACTIVE', true)
       }
+    },
+    addParkingLot () {
+      this.$router.push('/addlot').catch(() => {})
     }
   },
   created () {
