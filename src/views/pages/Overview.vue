@@ -13,36 +13,24 @@
     <vx-card>
 
       <!-- TABLE ACTION ROW -->
-      <div class="flex flex-wrap justify-between items-center">
+      <div class="flex flex-wrap justify-between items-center top-wrapper">
 
         <!-- ITEMS PER PAGE -->
         <div class="mb-4 md:mb-0 mr-4 ag-grid-table-actions-left">
-          <vs-dropdown vs-trigger-click class="cursor-pointer">
-            <div class="p-4 border border-solid d-theme-border-grey-light rounded-full d-theme-dark-bg cursor-pointer flex items-center justify-between font-medium">
-              <span class="mr-2">{{ currentPage * paginationPageSize - (paginationPageSize - 1) }} - {{ contacts.length - currentPage * paginationPageSize > 0 ? currentPage * paginationPageSize : contacts.length }} of {{ contacts.length }}</span>
-              <feather-icon icon="ChevronDownIcon" svgClasses="h-4 w-4" />
-            </div>
-            <!-- <vs-button class="btn-drop" type="line" color="primary" icon-pack="feather" icon="icon-chevron-down"></vs-button> -->
-            <vs-dropdown-menu>
-              <vs-dropdown-item @click="gridApi.paginationSetPageSize(5)">
-                <span>5</span>
-              </vs-dropdown-item>
-              <vs-dropdown-item @click="gridApi.paginationSetPageSize(10)">
-                <span>10</span>
-              </vs-dropdown-item>
-              <vs-dropdown-item @click="gridApi.paginationSetPageSize(20)">
-                <span>20</span>
-              </vs-dropdown-item>
-              <vs-dropdown-item @click="gridApi.paginationSetPageSize(50)">
-                <span>50</span>
-              </vs-dropdown-item>
-            </vs-dropdown-menu>
-          </vs-dropdown>
+          <h5> Parking Lots </h5>
         </div>
 
         <!-- TABLE ACTION COL-2: SEARCH & EXPORT AS CSV -->
         <div class="flex flex-wrap items-center justify-between ag-grid-table-actions-right">
-          <vs-input class="mb-4 md:mb-0 mr-4" v-model="searchQuery" @input="updateSearchQuery" placeholder="Search..." />
+          <vx-input-group class="mb-3 search-input-group">
+            <template slot="prepend">
+              <div class="prepend-text bg-primary">
+                <feather-icon icon="SearchIcon" svgClasses="h-4 w-4" />
+              </div>
+            </template>
+
+            <vs-input class="mb-2 md:mb-0 mr-4" v-model="searchQuery" @input="updateSearchQuery" placeholder="Search..." />
+          </vx-input-group>
           <!-- <vs-button class="mb-4 md:mb-0" @click="gridApi.exportDataAsCsv()">Export as CSV</vs-button> -->
         </div>
       </div>
@@ -63,6 +51,27 @@
         :suppressPaginationPanel="true"
         :enableRtl="$vs.rtl">
       </ag-grid-vue>
+      <vs-dropdown vs-trigger-click class="cursor-pointer">
+        <div class="p-2 border border-solid d-theme-border-grey-light rounded-full d-theme-dark-bg cursor-pointer flex items-center justify-between font-medium">
+          <span class="mr-2">{{ currentPage * paginationPageSize - (paginationPageSize - 1) }} - {{ contacts.length - currentPage * paginationPageSize > 0 ? currentPage * paginationPageSize : contacts.length }} of {{ contacts.length }}</span>
+          <feather-icon icon="ChevronDownIcon" svgClasses="h-4 w-4" />
+        </div>
+        <!-- <vs-button class="btn-drop" type="line" color="primary" icon-pack="feather" icon="icon-chevron-down"></vs-button> -->
+        <vs-dropdown-menu>
+          <vs-dropdown-item @click="gridApi.paginationSetPageSize(5)">
+            <span>5</span>
+          </vs-dropdown-item>
+          <vs-dropdown-item @click="gridApi.paginationSetPageSize(10)">
+            <span>10</span>
+          </vs-dropdown-item>
+          <vs-dropdown-item @click="gridApi.paginationSetPageSize(20)">
+            <span>20</span>
+          </vs-dropdown-item>
+          <vs-dropdown-item @click="gridApi.paginationSetPageSize(50)">
+            <span>50</span>
+          </vs-dropdown-item>
+        </vs-dropdown-menu>
+      </vs-dropdown>
       <vs-pagination
         :total="totalPages"
         :max="maxPageNumbers"
@@ -96,15 +105,30 @@ export default {
       maxPageNumbers: 7,
       gridApi: null,
       defaultColDef: {
+        flex: 1,
         sortable: true,
         resizable: true,
-        suppressMenu: true
+        suppressMenu: true,
+        headerComponentParams: {
+          template:
+            '<div class="ag-cell-label-container" role="presentation">' +
+            '  <span ref="eMenu" class="ag-header-icon ag-header-cell-menu-button"></span>' +
+            '  <div ref="eLabel" class="ag-header-cell-label" role="presentation">' +
+            '    <span ref="eSortOrder" class="ag-header-icon ag-sort-order"></span>' +
+            '    <span ref="eSortAsc" class="ag-header-icon ag-sort-ascending-icon"></span>' +
+            '    <span ref="eSortDesc" class="ag-header-icon ag-sort-descending-icon"></span>' +
+            '    <span ref="eSortNone" class="ag-header-icon ag-sort-none-icon"></span>' +
+            '    <span ref="eText" class="ag-header-cell-text" role="columnheader" style="white-space: normal;"></span>' +
+            '    <span ref="eFilter" class="ag-header-icon ag-filter-icon"></span>' +
+            '  </div>' +
+            '</div>'
+        }
       },
       columnDefs: [
         {
           headerName: 'ID',
           field: 'id',
-          width: 100
+          width: 80
         },
         {
           headerName: 'Username:',
@@ -223,3 +247,18 @@ export default {
 }
 
 </script>
+
+<style lang="scss" scope>
+.top-wrapper {
+  box-shadow: 0px 7px 7px -10px #111111;
+  padding: 0 20px;
+}
+.ag-grid-table-actions-left {
+  h5 {
+    color: rgba(var(--vs-primary),1);
+  }
+}
+.ag-header-row {
+  color: rgba(var(--vs-primary),1);
+}
+</style>

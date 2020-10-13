@@ -32,8 +32,8 @@ export default {
 
 <style lang="scss" scope>
 .ag-cell button.vs-switch {
-    margin: auto;
-    margin-top: 12px;
-    width: 70px !important;
+  margin: auto;
+  margin-top: 12px;
+  width: 70px !important;
 }
 </style>
