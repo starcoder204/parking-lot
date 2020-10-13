@@ -2,7 +2,31 @@
     <div class="vx-row">
         <!-- Left section -->
         <div class="vx-col md:w-2/3 w-full mb-base">
-            <vx-card title="Parking lot without signs:">
+            <vx-card>
+                <h5>Parking lot without signs:</h5>
+                <div class="vx-row mt-5">
+                    <div class="vx-col w-full sm:w-1/2 lg:w-1/3 mb-base">
+                        <vx-card class="lot-image">
+                            <div slot="no-body">
+                                <img :src="image" alt="content-img" class="responsive card-img-top rounded-lg">
+                            </div>
+                        </vx-card>
+                    </div>
+                    <div class="vx-col w-full sm:w-1/2 lg:w-1/3 mb-base">
+                        <vx-card class="lot-image">
+                            <div slot="no-body">
+                                <img :src="image" alt="content-img" class="responsive card-img-top rounded-lg">
+                            </div>
+                        </vx-card>
+                    </div>
+                    <div class="vx-col w-full sm:w-1/2 lg:w-1/3 mb-base">
+                        <vx-card class="lot-image">
+                            <div slot="no-body">
+                                <img :src="image" alt="content-img" class="responsive card-img-top rounded-lg">
+                            </div>
+                        </vx-card>
+                    </div>
+                </div>
                 <h5>Data of Parking Lot</h5>
                 <div class="vx-row">
                     <div class="vx-col md:w-1/2 w-full mb-base">
@@ -29,7 +53,7 @@
                     </div>
 
                     <div class="vx-col md:w-1/2 w-full mb-base">
-                        <div class="vx-row mt-3 mb-3">
+                        <div class="vx-row mt-3 mb-5">
                             <div class="vx-col md:w-1/2 w-full">
                                 <vs-input class="w-full" label-placeholder="Number Parking Spaces:" v-model="parkingLotForm.number_parking_spaces" />
                             </div>
@@ -37,9 +61,74 @@
                                 <vs-input class="w-full" label-placeholder="Usage Relationship:" v-model="parkingLotForm.relationship" />
                             </div>
                         </div>
+                        <h5>Signing of User:</h5>
+                        <div class="vx-row mt-3 mb-5">
+                            <div class="vx-col md:w-1/2 w-full">
+                            </div>
+                            <div class="vx-col md:w-1/2 w-full">
+                                <vs-button color="primary" type="filled" size="small">Ask NEW</vs-button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <h5>Sign Order:</h5>
+                <div class="vx-row mt-5">
+                    <div class="vx-col w-full sm:w-1/3 lg:w-1/5 p-5">
+                        <vx-card>
+                            <div slot="no-body">
+                                <img :src="sign_order_image1" alt="content-img" class="responsive rounded-lg">
+                                <div class="mt-4 text-center">
+                                    <vs-input-number v-model="number1" label="Anzahl" size="small"/>
+                                    <vs-button color="primary" type="filled" class="w-full mt-3" size="small">attachment</vs-button>
+                                </div>
+                            </div>
+                        </vx-card>
+                    </div>
+                    <div class="vx-col w-full sm:w-1/3 lg:w-1/5 p-5">
+                        <vx-card>
+                            <div slot="no-body">
+                                <img :src="sign_order_image1" alt="content-img" class="responsive rounded-lg">
+                                <div class="mt-4 text-center">
+                                    <vs-input-number v-model="number1" label="Anzahl" size="small"/>
+                                    <vs-button color="primary" type="filled" class="w-full mt-3" size="small">attachment</vs-button>
+                                </div>
+                            </div>
+                        </vx-card>
+                    </div>
+                    <div class="vx-col w-full sm:w-1/3 lg:w-1/5 p-5">
+                        <vx-card>
+                            <div slot="no-body">
+                                <img :src="sign_order_image1" alt="content-img" class="responsive rounded-lg">
+                                <div class="mt-4 text-center">
+                                    <vs-input-number v-model="number1" label="Anzahl" size="small"/>
+                                    <vs-button color="primary" type="filled" class="w-full mt-3" size="small">attachment</vs-button>
+                                </div>
+                            </div>
+                        </vx-card>
+                    </div>
+                    <div class="vx-col w-full sm:w-1/3 lg:w-1/5 p-5">
+                        <vx-card>
+                            <div slot="no-body">
+                                <img :src="sign_order_image1" alt="content-img" class="responsive rounded-lg">
+                                <div class="mt-4 text-center">
+                                    <vs-input-number v-model="number1" label="Anzahl" size="small"/>
+                                    <vs-button color="primary" type="filled" class="w-full mt-3" size="small">attachment</vs-button>
+                                </div>
+                            </div>
+                        </vx-card>
+                    </div>
+                    <div class="vx-col w-full sm:w-1/3 lg:w-1/5 p-5">
+                        <vx-card>
+                            <div slot="no-body">
+                                <img :src="sign_order_image1" alt="content-img" class="responsive rounded-lg">
+                                <div class="mt-4 text-center">
+                                    <vs-input-number v-model="number1" label="Anzahl" size="small"/>
+                                    <vs-button color="primary" type="filled" class="w-full mt-3" size="small">attachment</vs-button>
+                                </div>
+                            </div>
+                        </vx-card>
+                    </div>
+                </div>
             </vx-card>
         </div>
 
@@ -100,6 +189,9 @@
 export default{
   data () {
     return {
+      image: require('@/assets/images/pages/login.png'),
+      sign_order_image1: require('@/assets/images/pages/sign_orders/1.png'),
+      number1: 1,
       parkingLotForm: {
         name: '',
         address: '',
@@ -125,23 +217,7 @@ export default{
         receiver_name: '',
         company: '',
         address: ''
-      },
-      check1: '',
-      check2: '',
-      check3: '',
-      check4: '',
-      check5: '',
-      check6: '',
-      check7: '',
-      input1: '',
-      input2: '',
-      input3: '',
-      input4: '',
-      input5: '',
-      input6: '',
-      input7: '',
-      input8: '',
-      input9: '',
+      }
     }
   },
   methods: {
@@ -160,7 +236,7 @@ export default{
 // .vs-input-primary {
 //     border: 1px solid rgba(var(--vs-success),1)!important;
 // }
-input {
+.lot-image, input.vs-input--input {
     border: 1px solid rgba(var(--vs-success),1) !important;
 }
 .vs-input-primary .vs-input--input:focus {
