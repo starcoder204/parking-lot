@@ -8,7 +8,7 @@
                     <div class="vx-col w-full sm:w-1/2 lg:w-1/3 mb-base">
                         <vx-card class="lot-image">
                             <div slot="no-body">
-                                <img :src="image" alt="content-img" class="responsive card-img-top rounded-lg">
+                                <img :src="image" @click="clickPhoto" alt="content-img" class="responsive card-img-top rounded-lg">
                             </div>
                         </vx-card>
                     </div>
@@ -27,6 +27,7 @@
                         </vx-card>
                     </div>
                 </div>
+                <input type="file" class="hidden" ref="updateImgInput" id="user_photo" @change="previewImage" accept="image/*">
                 <h5>Data of Parking Lot</h5>
                 <div class="vx-row">
                     <div class="vx-col md:w-1/2 w-full mb-base">
@@ -186,9 +187,13 @@
 </template>
 
 <script>
+import { LotServices } from '@/services/index'
 export default{
   data () {
     return {
+      lotId: null,
+      imageFile: null,
+      imageData: '',
       image: require('@/assets/images/pages/login.png'),
       sign_order_image1: require('@/assets/images/pages/sign_orders/1.png'),
       number1: 1,
@@ -224,20 +229,61 @@ export default{
       }
     }
   },
+  created () {
+    this.selectedUser = this.userOptions[0]
+    this.lotId = this.$route.params.lot_id
+    const params = {
+      admin: 'lot_read',
+      id: this.lotId
+    }
+    // this.$store.dispatch('parkinglot/parkingLot', params)
+    LotServices.parkingLot(params).then(resp => {
+      console.log(resp)
+    }).catch(err => {
+      console.log(err)
+    })
+  },
+  mounted () {
+    const lot = this.$store.getters['parkinglot/getLots']
+    console.log(lot)
+  },
   methods: {
+    clickPhoto () {
+      console.log('photo click')
+      document.getElementById('user_photo').click()
+    },
+    previewImage (event) {
+      var input = event.target
+      if (input.files && input.files[0]) {
+        var reader = new FileReader()
+        reader.onload = (e) => {
+          this.image = e.target.result
+        }
+        reader.readAsDataURL(input.files[0])
+        this.imageFile = input.files[0]
+        setTimeout(() => {
+          this.uploadPicture()
+        }, 200)
+      }
+    },
+    uploadPicture () {
+    },
     chooseUser () {
       const username = this.userForm.username
       this.selectedUser = this.userOptions.filter(e => e.value === username)[0]
     }
-  },
-  mounted () {
-    this.selectedUser = this.userOptions[0]
-  }
+  }  
 }
 </script>
 
 <style lang="scss" scope>
 .add-lot-page {
+    #user_photo {
+        display: none;
+    }
+    .vuesax-app-is-ltr .vs-input--input.hasValue+.vs-placeholder-label {
+        color: #2d2a2a
+    }
     .lot-image, input.vs-input--input {
         border: 1px solid rgba(var(--vs-success),1) !important;
     }

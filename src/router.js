@@ -90,6 +90,20 @@ const router = new Router({
             pageTitle: 'Add Parking Log',
             rule: 'editor'
           }
+        },
+        {
+          path: '/lot/:lot_id',
+          name: 'lot',
+          component: () => import('./views/pages/ParkingLot.vue'),
+          meta: {
+            breadcrumb: [
+              { title: 'Parking Lot', url: '/' },
+              { title: 'Setups' },
+              { title: 'Parking Lot', active: true }
+            ],
+            pageTitle: 'Parking Log',
+            rule: 'editor'
+          }
         }
       ]
     },

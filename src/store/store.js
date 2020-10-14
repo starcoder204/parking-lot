@@ -16,6 +16,8 @@ import getters from './getters'
 import mutations from './mutations'
 import actions from './actions'
 
+import moduleLot from './lot/moduleLot.js'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -23,5 +25,8 @@ export default new Vuex.Store({
   mutations,
   state,
   actions,
+  modules: {
+    parkinglot: moduleLot
+  },
   strict: process.env.NODE_ENV !== 'production'
 })

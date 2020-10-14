@@ -1,6 +1,6 @@
 <template>
     <div :style="{'direction': $vs.rtl ? 'rtl' : 'ltr'}">
-      <vs-button color="primary" type="filled" size="small">Ansehen</vs-button>
+      <vs-button color="primary" type="filled" size="small" @click="viewLot">Ansehen</vs-button>
     </div>
 </template>
 
@@ -33,6 +33,10 @@ export default {
         title: 'User Deleted',
         text: 'The selected user was successfully deleted'
       })
+    },
+    viewLot () {
+      const lotId = this.params.data.id
+      this.$router.push({ name: 'lot', params: { lot_id: lotId }})
     }
   }
 }
