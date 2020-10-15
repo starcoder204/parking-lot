@@ -73,3 +73,12 @@
 .vs-switch--text.text-off {
     color: white;
 }
+
+.failed-info {
+   color: red;
+   margin: auto;
+}
+
+.input-span-placeholder {
+   color: #ada3a3 !important;
+}

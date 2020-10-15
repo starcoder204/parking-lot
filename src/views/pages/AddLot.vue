@@ -45,9 +45,9 @@
                                 <vs-input class="w-full" label-placeholder="Principle:" v-model="parkingLotForm.principle" />
                             </div>
                         </div>
-                        <div class="vx-row mb-3">
+                        <div class="vx-row mt-5">
                             <div class="vx-col w-full">
-                                <vs-input class="w-full" label-placeholder="Date/Time of creation:" />
+                                <flat-pickr :config="configdateTimePicker" v-model="datetime" placeholder="Date/Time of creation:" />
                             </div>
                         </div>
                     </div>
@@ -186,6 +186,8 @@
 </template>
 
 <script>
+import flatPickr from 'vue-flatpickr-component'
+import 'flatpickr/dist/flatpickr.css'
 export default{
   data () {
     return {
@@ -221,8 +223,16 @@ export default{
         receiver_name: '',
         company: '',
         address: ''
+      },
+      datetime: null,
+      configdateTimePicker: {
+        enableTime: true,
+        dateFormat: 'd-m-Y H:i:ss'
       }
     }
+  },
+  components: {
+    flatPickr
   },
   methods: {
     chooseUser () {
@@ -238,7 +248,7 @@ export default{
 
 <style lang="scss" scope>
 .add-lot-page {
-    .lot-image, input.vs-input--input {
+    .lot-image, input.vs-input--input, .flatpickr-input {
         border: 1px solid rgba(var(--vs-success),1) !important;
     }
     .vs-input-primary .vs-input--input:focus {

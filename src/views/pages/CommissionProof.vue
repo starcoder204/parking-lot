@@ -1,13 +1,3 @@
-<!-- =========================================================================================
-    File Name: AgGridTable.vue
-    Description: Ag Grid table
-    ----------------------------------------------------------------------------------------
-    Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
-    Author: Pixinvent
-    Author URL: http://www.themeforest.net/user/pixinvent
-========================================================================================== -->
-
-
 <template>
   <div id="ag-grid-demo">
     <vx-card>
@@ -84,7 +74,7 @@
 <script>
 import Vue from 'vue'
 import { AgGridVue } from 'ag-grid-vue'
-import { contacts } from './data.js'
+import { LotServices } from '@/services/index'
 
 import '@/assets/scss/vuexy/extraComponents/agGridStyleOverride.scss'
 import CellRendererLink from './cell-renderer/CellRendererLink'
@@ -127,12 +117,12 @@ export default {
       columnDefs: [
         {
           headerName: 'ID',
-          field: 'id',
+          field: 'lot_id',
           width: 80
         },
         {
           headerName: 'Username:',
-          field: 'username',
+          field: 'user_id.username',
           width: 175,
           cellRendererFramework: Vue.extend(CellRendererLink),
           cellClass: 'text-center'
@@ -149,42 +139,42 @@ export default {
         },
         {
           headerName: 'Commission:',
-          field: 'commission',
+          field: 'status_commission',
           width: 150,
           cellRendererFramework: Vue.extend(CellRendererVerified),
           cellClass: 'text-center'
         },
         {
           headerName: 'Image Signs:',
-          field: 'image_signs',
+          field: 'status_image_sign',
           width: 150,
           cellRendererFramework: Vue.extend(CellRendererVerified),
           cellClass: 'text-center'
         },
         {
           headerName: 'Proofed:',
-          field: 'proofed',
+          field: 'status_proofed',
           width: 150,
           cellRendererFramework: Vue.extend(CellRendererVerified),
           cellClass: 'text-center'
         },
         {
           headerName: 'Lot Status Admin:',
-          field: 'lot_status_admin',
+          field: 'status_by_admin',
           width: 125,
           cellRendererFramework: Vue.extend(CellRendererVerified),
           cellClass: 'text-center'
         },
         {
           headerName: 'Lot Status User:',
-          field: 'lot_status_user',
+          field: 'status_by_user',
           width: 125,
           cellRendererFramework: Vue.extend(CellRendererVerified),
           cellClass: 'text-center'
         },
         {
           headerName: '',
-          field: 'followers',
+          field: '',
           width: 125,
           cellRendererFramework: Vue.extend(CellRendererActions),
           cellClass: 'text-center'
@@ -229,17 +219,27 @@ export default {
   methods: {
     updateSearchQuery (val) {
       this.gridApi.setQuickFilter(val)
+    },
+    freshLots (lots) {
+      lots.forEach(lot => {
+        lot.address = `${lot.town} ${lot.street} ${lot.house_number}`
+      })
+      this.contacts = lots.filter(e => e.status_image_sign === '1' && e.status_commission === '0')
     }
   },
   mounted () {
-	this.contacts = contacts.filter(e => e.image_signs === 1 && e.commission === 0)
     this.gridApi = this.gridOptions.api
-
-    /* =================================================================
-      NOTE:
-      Header is not aligned properly in RTL version of agGrid table.
-      However, we given fix to this issue. If you want more robust solution please contact them at gitHub
-    ================================================================= */
+    const params = {
+      admin: 'lot_list'
+    }
+    this.$vs.loading()
+    LotServices.parkingLot(params).then(resp => {
+      this.freshLots(resp.lots)
+      this.$vs.loading.close()
+    }).catch(err => {
+      console.log(err)
+    })
+    
     if (this.$vs.rtl) {
       const header = this.$refs.agGridTable.$el.querySelector('.ag-header-container')
       header.style.left = `-${  String(Number(header.style.transform.slice(11, -3)) + 9)  }px`
@@ -251,8 +251,9 @@ export default {
 
 <style lang="scss" scope>
 .top-wrapper {
-  box-shadow: 0px 7px 7px -10px #111111;
+  box-shadow: 0px 7px 6px -10px #111111;
   padding: 0 20px;
+  margin-bottom: 20px;
 }
 .ag-grid-table-actions-left {
   h5 {

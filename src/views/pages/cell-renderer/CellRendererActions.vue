@@ -35,7 +35,7 @@ export default {
       })
     },
     viewLot () {
-      const lotId = this.params.data.id
+      const lotId = this.params.data.lot_id
       this.$router.push({ name: 'lot', params: { lot_id: lotId }})
     }
   }
