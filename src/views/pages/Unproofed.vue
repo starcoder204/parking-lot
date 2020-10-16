@@ -234,9 +234,12 @@ export default {
     }
     this.$vs.loading()
     LotServices.parkingLot(params).then(resp => {
-      this.freshLots(resp.lots)
+     if (!resp.error) {
+        this.freshLots(resp.lots)
+      }
       this.$vs.loading.close()
     }).catch(err => {
+      this.$vs.loading.close()
       console.log(err)
     })
     
