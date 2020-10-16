@@ -8,25 +8,26 @@
                     <div class="vx-col w-full sm:w-1/2 lg:w-1/3 mb-base">
                         <vx-card class="lot-image">
                             <div slot="no-body">
-                                <img :src="image" alt="content-img" class="responsive card-img-top rounded-lg">
+                                <img :src="image" @click="clickPhoto(0)" alt="content-img" class="responsive card-img-top rounded-lg">
                             </div>
                         </vx-card>
                     </div>
                     <div class="vx-col w-full sm:w-1/2 lg:w-1/3 mb-base">
                         <vx-card class="lot-image">
                             <div slot="no-body">
-                                <img :src="image" alt="content-img" class="responsive card-img-top rounded-lg">
+                                <img :src="image1" @click="clickPhoto(1)" alt="content-img" class="responsive card-img-top rounded-lg">
                             </div>
                         </vx-card>
                     </div>
                     <div class="vx-col w-full sm:w-1/2 lg:w-1/3 mb-base">
                         <vx-card class="lot-image">
                             <div slot="no-body">
-                                <img :src="image" alt="content-img" class="responsive card-img-top rounded-lg">
+                                <img :src="image2" @click="clickPhoto(2)" alt="content-img" class="responsive card-img-top rounded-lg">
                             </div>
                         </vx-card>
                     </div>
                 </div>
+                <input type="file" class="hidden" ref="updateImgInput" id="user_photo" @change="previewImage" accept="image/*">
                 <h5>Data of Parking Lot</h5>
                 <div class="vx-row">
                     <div class="vx-col md:w-1/2 w-full mb-base">
@@ -191,7 +192,9 @@ import 'flatpickr/dist/flatpickr.css'
 export default{
   data () {
     return {
-      image: require('@/assets/images/pages/login.png'),
+      image: require('@/assets/images/upload_default.png'),
+      image1: require('@/assets/images/upload_default.png'),
+      image2: require('@/assets/images/upload_default.png'),
       sign_order_image1: require('@/assets/images/pages/sign_orders/1.png'),
       number1: 1,
       number2: 1,
@@ -203,8 +206,8 @@ export default{
         address: '',
         principal: '',
         created_at: '',
-        number_parking_spaces: 34,
-        relationship: 'Owner'
+        number_parking_spaces: '',
+        relationship: ''
       },
       userOptions: [
         {text: 'shelley', value:'shelley', avatar: require('@/assets/images/portrait/small/avatar-s-1.jpg') },
@@ -228,7 +231,9 @@ export default{
       configdateTimePicker: {
         enableTime: true,
         dateFormat: 'd-m-Y H:i:ss'
-      }
+      },
+      imageFile: null,
+      selectedImageIndex: null
     }
   },
   components: {
@@ -238,6 +243,33 @@ export default{
     chooseUser () {
       const username = this.userForm.username
       this.selectedUser = this.userOptions.filter(e => e.value === username)[0]
+    },
+    clickPhoto (index) {
+      console.log('photo click')
+      this.selectedImageIndex = index
+      document.getElementById('user_photo').click()
+    },
+    previewImage (event) {
+      const input = event.target
+      if (input.files && input.files[0]) {
+        const reader = new FileReader()
+        reader.onload = (e) => {
+          if (this.selectedImageIndex === 0) {
+            this.image = e.target.result
+          } else if (this.selectedImageIndex === 1) {
+            this.image1 = e.target.result
+          } else if (this.selectedImageIndex === 2) {
+            this.image2 = e.target.result
+          }
+        }
+        reader.readAsDataURL(input.files[0])
+        this.imageFile = input.files[0]
+        setTimeout(() => {
+          this.uploadPicture()
+        }, 200)
+      }
+    },
+    uploadPicture () {
     }
   },
   mounted () {
@@ -248,6 +280,15 @@ export default{
 
 <style lang="scss" scope>
 .add-lot-page {
+    #user_photo {
+        display: none;
+    }
+    .vuesax-app-is-ltr .vs-input--input.hasValue+.vs-placeholder-label {
+        color: #2d2a2a
+    }
+    .lot-image img {
+        height: 200px;
+    }
     .lot-image, input.vs-input--input, .flatpickr-input {
         border: 1px solid rgba(var(--vs-success),1) !important;
     }
