@@ -1,7 +1,15 @@
 import {
   parkingLot
-} from './parkinglotService'
+} from './lotService'
+
+import {
+  userList
+} from './userService'
 
 export const LotServices = {
   parkingLot
+}
+
+export const UserServices = {
+  userList
 }

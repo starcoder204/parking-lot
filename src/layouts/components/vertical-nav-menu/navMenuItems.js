@@ -21,25 +21,67 @@ export default [
     i18n: 'Lots',
     items: [
       {
-        url: '/overview',
+        url: '/lot/overview',
         name: 'Overview',
         slug: 'email',
         icon: 'CheckSquareIcon',
         i18n: 'Email'
       },
       {
-        url: '/unproofed',
+        url: '/lot/unproofed',
         name: 'Unproofed',
         slug: 'chat',
         icon: 'CheckSquareIcon',
         i18n: 'Chat'
       },
       {
-        url: '/commissionproof',
+        url: '/lot/commissionproof',
         name: 'Commision Proof',
         slug: 'todo',
         icon: 'CheckSquareIcon',
         i18n: 'Todo'
+      }
+    ]
+  },
+  {
+    header: 'User',
+    icon: 'PackageIcon',
+    i18n: 'User',
+    items: [
+      {
+        url: '/user-list',
+        name: 'Users',
+        slug: 'email',
+        icon: 'CheckSquareIcon',
+        i18n: 'Email'
+      },
+      {
+        url: '/admin-list',
+        name: 'Admins',
+        slug: 'chat',
+        icon: 'CheckSquareIcon',
+        i18n: 'Chat'
+      }
+    ]
+  },
+  {
+    header: 'Financial',
+    icon: 'PackageIcon',
+    i18n: 'Financial',
+    items: [
+      {
+        url: '/financial/overview',
+        name: 'Overview',
+        slug: 'email',
+        icon: 'CheckSquareIcon',
+        i18n: 'Email'
+      },
+      {
+        url: '/financial/payout',
+        name: 'Payout',
+        slug: 'chat',
+        icon: 'CheckSquareIcon',
+        i18n: 'Chat'
       }
     ]
   }

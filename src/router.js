@@ -36,9 +36,9 @@ const router = new Router({
           component: () => import('./views/Dashboard.vue')
         },
         {
-          path: '/overview',
-          name: 'overview',
-          component: () => import('./views/pages/Overview.vue'),
+          path: '/lot/overview',
+          name: 'lot-overview',
+          component: () => import('./views/lot/Overview.vue'),
           meta: {
             breadcrumb: [
               { title: 'Overview', url: '/' },
@@ -50,9 +50,9 @@ const router = new Router({
           }
         },
         {
-          path: '/unproofed',
-          name: 'unproofed',
-          component: () => import('./views/pages/Unproofed.vue'),
+          path: '/lot/unproofed',
+          name: 'lot-unproofed',
+          component: () => import('./views/lot/Unproofed.vue'),
           meta: {
             breadcrumb: [
               { title: 'Unproofed', url: '/' },
@@ -64,9 +64,9 @@ const router = new Router({
           }
         },
         {
-          path: '/commissionproof',
-          name: 'commissionproof',
-          component: () => import('./views/pages/CommissionProof.vue'),
+          path: '/lot/commissionproof',
+          name: 'lot-commissionproof',
+          component: () => import('./views/lot/CommissionProof.vue'),
           meta: {
             breadcrumb: [
               { title: 'Commission Proof', url: '/' },
@@ -78,9 +78,9 @@ const router = new Router({
           }
         },
         {
-          path: '/addlot',
+          path: '/lot/addlot',
           name: 'addlot',
-          component: () => import('./views/pages/AddLot.vue'),
+          component: () => import('./views/lot/AddLot.vue'),
           meta: {
             breadcrumb: [
               { title: 'Commission Proof', url: '/' },
@@ -94,7 +94,7 @@ const router = new Router({
         {
           path: '/lot/:lot_id',
           name: 'lot',
-          component: () => import('./views/pages/ParkingLot.vue'),
+          component: () => import('./views/lot/ParkingLot.vue'),
           meta: {
             breadcrumb: [
               { title: 'Parking Lot', url: '/' },
@@ -102,6 +102,76 @@ const router = new Router({
               { title: 'Parking Lot', active: true }
             ],
             pageTitle: 'Parking Log',
+            rule: 'editor'
+          }
+        },
+        {
+          path: '/user-list',
+          name: 'user-list',
+          component: () => import('./views/user/UserList.vue'),
+          meta: {
+            breadcrumb: [
+              { title: 'User', url: '/' },
+              { title: 'Setups' },
+              { title: 'User', active: true }
+            ],
+            pageTitle: 'User',
+            rule: 'editor'
+          }
+        },
+        {
+          path: '/user/:user_id',
+          name: 'user',
+          component: () => import('./views/user/User.vue'),
+          meta: {
+            breadcrumb: [
+              { title: 'User', url: '/' },
+              { title: 'Setups' },
+              { title: 'User', active: true }
+            ],
+            pageTitle: 'User',
+            rule: 'editor'
+          }
+        },
+        {
+          path: '/admin-list',
+          name: 'admin-list',
+          component: () => import('./views/user/AdminList.vue'),
+          meta: {
+            breadcrumb: [
+              { title: 'Dashboard User', url: '/' },
+              { title: 'Setups' },
+              { title: 'Dashboard User', active: true }
+            ],
+            pageTitle: 'Dashboard User',
+            rule: 'editor'
+          }
+        },
+        {
+          path: '/financial/overview',
+          name: 'financial-overview',
+          component: () => import('./views/financial/Overview.vue'),
+          meta: {
+            breadcrumb: [
+              { title: 'Financial Overview', url: '/' },
+              { title: 'Setups' },
+              { title: 'Financial Overview', active: true }
+            ],
+            pageTitle: 'Financial Overview',
+            rule: 'editor'
+          }
+        },
+        {
+          path: '/financial/payout',
+          name: 'financial-payout',
+          component: () => import('./views/financial/Payout.vue'),
+          meta: {
+            breadcrumb: [
+              { title: 'Payout Overview', url: '/' },
+              { title: 'Setups' },
+              { title: 'Payout Overview', active: true }
+            ],
+            pageTitle: 'Payout Overview',
             rule: 'editor'
           }
         }
@@ -118,14 +188,14 @@ const router = new Router({
         // PAGES
         // =============================================================================
         {
-          path: '/pages/login',
+          path: '/login',
           name: 'page-login',
-          component: () => import('@/views/pages/Login.vue')
+          component: () => import('@/views/Login.vue')
         },
         {
-          path: '/pages/error-404',
+          path: '/error-404',
           name: 'page-error-404',
-          component: () => import('@/views/pages/Error404.vue')
+          component: () => import('@/views/Error404.vue')
         }
       ]
     },

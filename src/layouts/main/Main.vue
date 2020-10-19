@@ -65,9 +65,9 @@
                 <!-- BREADCRUMB -->
                 <vx-breadcrumb class="ml-4 md:block hidden" v-if="$route.meta.breadcrumb" :route="$route" :isRTL="$vs.rtl" />
 
-                <!-- DROPDOWN -->
-                <vs-button color="primary" type="filled" @click="addParkingLot" class="ml-auto md:block hidden cursor-pointer">add parking lot</vs-button>
-
+                <vs-button color="primary" type="filled" @click="addParkingLot" v-if="isLotPage" class="ml-auto md:block hidden cursor-pointer">add parking lot</vs-button>
+                <vs-button color="success" type="filled" @click="addParkingLot" v-if="isAdminPage" class="ml-auto md:block hidden cursor-pointer">add</vs-button>
+                <vs-button color="primary" type="filled" @click="backToUserlist" v-if="isUserPage" class="ml-auto md:block hidden cursor-pointer">back</vs-button>
               </div>
             </transition>
 
@@ -164,7 +164,16 @@ export default {
       }
     },
     verticalNavMenuWidth () { return this.$store.state.verticalNavMenuWidth },
-    windowWidth ()          { return this.$store.state.windowWidth }
+    windowWidth ()          { return this.$store.state.windowWidth },
+    isLotPage () {
+      return this.$route.name.includes('lot-')
+    },
+    isAdminPage () {
+      return this.$route.name === 'admin-list'
+    },
+    isUserPage () {
+      return this.$route.name === 'user'
+    }
   },
   methods: {
     changeRouteTitle (title) {
@@ -185,6 +194,9 @@ export default {
     },
     addParkingLot () {
       this.$router.push('/addlot').catch(() => {})
+    },
+    backToUserlist () {
+      this.$router.push({ name: 'user-list' }).catch(() => {})
     }
   },
   created () {

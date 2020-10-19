@@ -7,7 +7,7 @@
 
         <!-- ITEMS PER PAGE -->
         <div class="mb-4 md:mb-0 mr-4 ag-grid-table-actions-left">
-          <h5> Parking Lots </h5>
+          <h5> User </h5>
         </div>
 
         <!-- TABLE ACTION COL-2: SEARCH & EXPORT AS CSV -->
@@ -74,7 +74,7 @@
 <script>
 import Vue from 'vue'
 import { AgGridVue } from 'ag-grid-vue'
-import { LotServices } from '@/services/index'
+import { UserServices } from '@/services/index'
 
 import '@/assets/scss/vuexy/extraComponents/agGridStyleOverride.scss'
 import CellRendererLink from './cell-renderer/CellRendererLink'
@@ -82,6 +82,7 @@ import CellRendererVerified from './cell-renderer/CellRendererVerified'
 import CellRendererActions from './cell-renderer/CellRendererActions'
 
 export default {
+  name: 'Overview',
   components: {
     AgGridVue,
     CellRendererLink,
@@ -117,66 +118,61 @@ export default {
       columnDefs: [
         {
           headerName: 'ID',
-          field: 'lot_id',
-          width: 80
+          field: 'user_id',
+          width: 90
         },
         {
           headerName: 'Username:',
-          field: 'user_id.username',
+          field: 'username',
           width: 175,
           cellRendererFramework: Vue.extend(CellRendererLink),
           cellClass: 'text-center'
         },
         {
-          headerName: 'Address of Lot:',
-          field: 'address',
-          width: 275
+          headerName: 'Usuage:',
+          field: 'username',
+          width: 120
         },
         {
-          headerName: 'Date of creation:',
-          field: 'created_at',
+          headerName: 'E-Mail:',
+          field: 'email',
+          width: 180
+        },
+        {
+          headerName: 'Lots:',
+          field: null,
+          width: 100
+        },
+        {
+          headerName: 'Tickets:',
+          field: null,
+          width: 130
+        },
+        {
+          headerName: 'Earned:',
+          field: null,
+          width: 120
+        },
+        {
+          headerName: 'Employees:',
+          field: null,
           width: 150
         },
         {
-          headerName: 'Commission:',
-          field: 'status_commission',
-          width: 150,
-          cellRendererFramework: Vue.extend(CellRendererVerified),
-          cellClass: 'text-center'
+          headerName: 'Registered:',
+          field: 'account_create',
+          width: 150
+		},
+		{
+          headerName: 'Last login:',
+          field: 'last_login',
+          width: 150
         },
         {
-          headerName: 'Image Signs:',
-          field: 'status_image_sign',
-          width: 150,
-          cellRendererFramework: Vue.extend(CellRendererVerified),
-          cellClass: 'text-center'
-        },
-        {
-          headerName: 'Proofed:',
-          field: 'status_proofed',
-          width: 150,
-          cellRendererFramework: Vue.extend(CellRendererVerified),
-          cellClass: 'text-center'
-        },
-        {
-          headerName: 'Lot Status Admin:',
-          field: 'status_by_admin',
+          headerName: 'Status:',
+          field: 'active_status_id',
           width: 125,
           cellRendererFramework: Vue.extend(CellRendererVerified),
-          cellClass: 'text-center'
-        },
-        {
-          headerName: 'Lot Status User:',
-          field: 'status_by_user',
-          width: 125,
-          cellRendererFramework: Vue.extend(CellRendererVerified),
-          cellClass: 'text-center'
-        },
-        {
-          headerName: '',
-          field: '',
-          width: 125,
-          cellRendererFramework: Vue.extend(CellRendererActions),
           cellClass: 'text-center'
         }
       ],
@@ -190,12 +186,12 @@ export default {
     }
   },
   watch: {
-    '$store.state.windowWidth' (val) {
-      if (val <= 576) {
-        this.maxPageNumbers = 4
-        this.gridOptions.columnApi.setColumnPinned('email', null)
-      } else this.gridOptions.columnApi.setColumnPinned('email', 'left')
-    }
+    // '$store.state.windowWidth' (val) {
+    //   if (val <= 576) {
+    //     this.maxPageNumbers = 4
+    //     this.gridOptions.columnApi.setColumnPinned('email', null)
+    //   } else this.gridOptions.columnApi.setColumnPinned('email', 'left')
+    // }
   },
   computed: {
     paginationPageSize () {
@@ -220,22 +216,23 @@ export default {
     updateSearchQuery (val) {
       this.gridApi.setQuickFilter(val)
     },
-    freshLots (lots) {
-      lots.forEach(lot => {
-        lot.address = `${lot.town} ${lot.street} ${lot.house_number}`
-      })
-      this.contacts = lots
+    freshUsers (users) {
+    //   users.forEach(lot => {
+    //     if (!lot.user_id) {
+    //       lot.user_id = {
+    //         username: null
+    //       }
+    //     }
+    //   })
+      this.contacts = users
     }
   },
   mounted () {
     this.gridApi = this.gridOptions.api
-    const params = {
-      admin: 'lot_list'
-    }
     this.$vs.loading()
-    LotServices.parkingLot(params).then(resp => {
+    UserServices.userList().then(resp => {
       if (!resp.error) {
-        this.freshLots(resp.lots)
+        this.freshUsers(resp.users)
       }
       this.$vs.loading.close()
     }).catch(err => {
