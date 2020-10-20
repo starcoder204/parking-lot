@@ -17,7 +17,7 @@
             }">
                 <feather-icon :icon="icon" class="p-3 inline-flex rounded-full" :class="[`text-${color}`, {'mb-4': !iconRight}]" :style="{background: `rgba(var(--vs-${color}),.15)`}"></feather-icon>
                 <div class="truncate">
-                    <h2 class="mb-1 font-bold">{{ statistic }}</h2>
+                    <h2 class="mb-1">{{ statistic }}</h2>
                     <span>{{ statisticTitle }}</span>
                 </div>
             </div>
@@ -73,6 +73,10 @@ export default{
     hideChart: {
       type: Boolean,
       default: false
+    },
+    chartConf: {
+      type: String,
+      default: '0'
     }
   },
   data () {
@@ -116,7 +120,7 @@ export default{
   created () {
     if (this.type === 'area') {
       // assign chart options
-      this.chartOptions = Object.assign({}, chartConfigs.areaChartOptions)
+      this.chartOptions = Object.assign({}, this.chartConf === '1' ? chartConfigs.areaChartOptions1 : chartConfigs.areaChartOptions)
 
       this.chartOptions['theme'] = {
         monochrome: {

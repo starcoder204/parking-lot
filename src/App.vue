@@ -66,6 +66,9 @@ export default {
     document.documentElement.style.setProperty('--vh', `${vh}px`)
     // change primary color
     this.$vs.theme({ primary: '#3aa7df' })
+    this.$vs.theme({ danger: '#98190c' })
+    this.$vs.theme({ success: '#38d500' })
+    this.$vs.theme({ warning: '#ede23d' })
   },
   async created () {
     const dir = this.$vs.rtl ? 'rtl' : 'ltr'

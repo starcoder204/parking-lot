@@ -1,13 +1,16 @@
 import { apiBaseUrl, appToken } from '@/config/settings'
 import { handleResponse } from './utils'
 
-export function userList () {
+export function userList (payload) {
   const requestOptions = {
     method: 'POST'
   }
-  var formData = new FormData()
+  let formData = new FormData()
   formData.append('token', appToken)
-  formData.append('admin', 'user_list')
+  let key
+  for (key in payload) {
+    formData.append(key, payload[key])
+  }
   requestOptions.body = formData
   return fetch(apiBaseUrl, requestOptions).then(handleResponse)
 }

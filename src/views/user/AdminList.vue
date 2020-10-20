@@ -80,6 +80,7 @@ import '@/assets/scss/vuexy/extraComponents/agGridStyleOverride.scss'
 import CellRendererLink from './cell-renderer/CellRendererLink'
 import CellRendererVerified from './cell-renderer/CellRendererVerified'
 import CellRendererActions from './cell-renderer/CellRendererActions'
+import { pageSize } from '@/config/settings'
 
 export default {
   name: 'Overview',
@@ -118,12 +119,12 @@ export default {
       columnDefs: [
         {
           headerName: 'ID',
-          field: 'user_id',
+          field: 'admin_id',
           width: 90
         },
         {
           headerName: 'DashboardUser:',
-          field: 'username',
+          field: 'name',
           width: 200,
           cellRendererFramework: Vue.extend(CellRendererLink),
           cellClass: 'text-center'
@@ -142,8 +143,8 @@ export default {
           headerName: 'Registered:',
           field: 'account_create',
           width: 150
-		},
-		{
+		    },
+		    {
           headerName: 'Last login:',
           field: 'last_login',
           width: 150
@@ -190,23 +191,21 @@ export default {
     updateSearchQuery (val) {
       this.gridApi.setQuickFilter(val)
     },
-    freshUsers (users) {
-    //   users.forEach(lot => {
-    //     if (!lot.user_id) {
-    //       lot.user_id = {
-    //         username: null
-    //       }
-    //     }
-    //   })
-      this.contacts = []
+    freshUsers (admins) {
+      this.contacts = admins
     }
   },
   mounted () {
     this.gridApi = this.gridOptions.api
+    const params = {
+      admin: 'admin_list',
+      per_page: pageSize,
+      page: 1
+    }
     this.$vs.loading()
-    UserServices.userList().then(resp => {
+    UserServices.userList(params).then(resp => {
       if (!resp.error) {
-        this.freshUsers(resp.users)
+        this.freshUsers(resp.items)
       }
       this.$vs.loading.close()
     }).catch(err => {

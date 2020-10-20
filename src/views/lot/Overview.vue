@@ -81,6 +81,8 @@ import CellRendererLink from './cell-renderer/CellRendererLink'
 import CellRendererVerified from './cell-renderer/CellRendererVerified'
 import CellRendererActions from './cell-renderer/CellRendererActions'
 
+import { pageSize } from '@/config/settings'
+
 export default {
   name: 'Overview',
   components: {
@@ -236,12 +238,14 @@ export default {
   mounted () {
     this.gridApi = this.gridOptions.api
     const params = {
-      admin: 'lot_list'
+      admin: 'lot_list',
+      per_page: pageSize,
+      page: 1
     }
     this.$vs.loading()
     LotServices.parkingLot(params).then(resp => {
       if (!resp.error) {
-        this.freshLots(resp.lots)
+        this.freshLots(resp.items)
       }
       this.$vs.loading.close()
     }).catch(err => {

@@ -5,7 +5,7 @@ export function parkingLot (payload) {
   const requestOptions = {
     method: 'POST'
   }
-  var formData = new FormData()
+  let formData = new FormData()
   formData.append('token', appToken)
   let key
   for (key in payload) {

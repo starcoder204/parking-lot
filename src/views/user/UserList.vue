@@ -80,6 +80,7 @@ import '@/assets/scss/vuexy/extraComponents/agGridStyleOverride.scss'
 import CellRendererLink from './cell-renderer/CellRendererLink'
 import CellRendererVerified from './cell-renderer/CellRendererVerified'
 import CellRendererActions from './cell-renderer/CellRendererActions'
+import { pageSize } from '@/config/settings'
 
 export default {
   name: 'Overview',
@@ -229,10 +230,15 @@ export default {
   },
   mounted () {
     this.gridApi = this.gridOptions.api
-    this.$vs.loading()
-    UserServices.userList().then(resp => {
+	this.$vs.loading()
+	const params = {
+      admin: 'user_list',
+      per_page: pageSize,
+      page: 1
+    }
+    UserServices.userList(params).then(resp => {
       if (!resp.error) {
-        this.freshUsers(resp.users)
+        this.freshUsers(resp.items)
       }
       this.$vs.loading.close()
     }).catch(err => {

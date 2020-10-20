@@ -193,7 +193,7 @@ export default {
       }
     },
     addParkingLot () {
-      this.$router.push('/addlot').catch(() => {})
+      this.$router.push({ name: 'addlot' }).catch(() => {})
     },
     backToUserlist () {
       this.$router.push({ name: 'user-list' }).catch(() => {})
