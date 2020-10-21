@@ -148,6 +148,20 @@ const router = new Router({
           }
         },
         {
+          path: '/adduser',
+          name: 'adduser',
+          component: () => import('./views/user/AddUser.vue'),
+          meta: {
+            breadcrumb: [
+              { title: 'New User', url: '/' },
+              { title: 'Setups' },
+              { title: 'New User', active: true }
+            ],
+            pageTitle: 'New User',
+            rule: 'editor'
+          }
+        },
+        {
           path: '/financial/overview',
           name: 'financial-overview',
           component: () => import('./views/financial/Overview.vue'),

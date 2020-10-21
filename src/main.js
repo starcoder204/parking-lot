@@ -50,6 +50,9 @@ import store from './store/store'
 // i18n
 import i18n from './i18n/i18n'
 
+// VeeValidate
+import VeeValidate from 'vee-validate'
+Vue.use(VeeValidate)
 
 // Vuejs - Vue wrapper for hammerjs
 import { VueHammer } from 'vue2-hammer'
@@ -67,7 +70,7 @@ require('./assets/css/iconfont.css')
 
 // Vue select css
 // Note: In latest version you have to add it separately
-// import 'vue-select/dist/vue-select.css';
+import 'vue-select/dist/vue-select.css';
 
 
 Vue.config.productionTip = false

@@ -125,7 +125,7 @@ export default {
         {
           headerName: 'DashboardUser:',
           field: 'name',
-          width: 200,
+          width: 300,
           cellRendererFramework: Vue.extend(CellRendererLink),
           cellClass: 'text-center'
         },
@@ -142,12 +142,12 @@ export default {
         {
           headerName: 'Registered:',
           field: 'account_create',
-          width: 150
-		    },
-		    {
+          width: 180
+        },
+        {
           headerName: 'Last login:',
           field: 'last_login',
-          width: 150
+          width: 180
         },
         {
           headerName: 'Status:',

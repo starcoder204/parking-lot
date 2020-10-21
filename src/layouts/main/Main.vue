@@ -66,8 +66,9 @@
                 <vx-breadcrumb class="ml-4 md:block hidden" v-if="$route.meta.breadcrumb" :route="$route" :isRTL="$vs.rtl" />
 
                 <vs-button color="primary" type="filled" @click="addParkingLot" v-if="isLotPage" class="ml-auto md:block hidden cursor-pointer">add parking lot</vs-button>
-                <vs-button color="success" type="filled" @click="addParkingLot" v-if="isAdminPage" class="ml-auto md:block hidden cursor-pointer">add</vs-button>
+                <vs-button color="success" type="filled" @click="addUser" v-if="isAdminPage" class="ml-auto md:block hidden cursor-pointer">add</vs-button>
                 <vs-button color="primary" type="filled" @click="backToUserlist" v-if="isUserPage" class="ml-auto md:block hidden cursor-pointer">back</vs-button>
+                <vs-button color="danger" type="filled" @click="backToAdminlist" v-if="isAddUserPage" class="ml-auto md:block hidden cursor-pointer">back</vs-button>
               </div>
             </transition>
 
@@ -173,6 +174,9 @@ export default {
     },
     isUserPage () {
       return this.$route.name === 'user'
+    },
+    isAddUserPage () {
+      return this.$route.name === 'adduser'
     }
   },
   methods: {
@@ -195,8 +199,14 @@ export default {
     addParkingLot () {
       this.$router.push({ name: 'addlot' }).catch(() => {})
     },
+    addUser () {
+      this.$router.push({ name: 'adduser' }).catch(() => {})
+    },
     backToUserlist () {
       this.$router.push({ name: 'user-list' }).catch(() => {})
+    },
+    backToAdminlist () {
+      this.$router.push({ name: 'admin-list' }).catch(() => {})
     }
   },
   created () {
