@@ -10,10 +10,10 @@
 
 export default [
   {
-    url: "/",
-    name: "Dashboard",
-    slug: "home",
-    icon: "HomeIcon",
+    url: '/',
+    name: 'Dashboard',
+    slug: 'home',
+    icon: 'HomeIcon'
   },
   {
     header: 'Lots',

@@ -5,10 +5,9 @@ export function userList (payload) {
   const requestOptions = {
     method: 'POST'
   }
-  let formData = new FormData()
+  const formData = new FormData()
   formData.append('token', appToken)
-  let key
-  for (key in payload) {
+  for (const key in payload) {
     formData.append(key, payload[key])
   }
   requestOptions.body = formData

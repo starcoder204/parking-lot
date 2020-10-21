@@ -163,8 +163,8 @@ export default {
           headerName: 'Registered:',
           field: 'account_create',
           width: 150
-		},
-		{
+        },
+        {
           headerName: 'Last login:',
           field: 'last_login',
           width: 150
@@ -230,8 +230,8 @@ export default {
   },
   mounted () {
     this.gridApi = this.gridOptions.api
-	this.$vs.loading()
-	const params = {
+    this.$vs.loading()
+    const params = {
       admin: 'user_list',
       per_page: pageSize,
       page: 1

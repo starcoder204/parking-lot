@@ -33,26 +33,27 @@ export default {
         id: this.params.data.lot_id
       }
       switch (this.field) {
-        case 'status_commission':
-          params.admin = 'lot_commission_status'
-          params.status_commission = value ? '0' : '1'
-          break
-        case 'status_image_sign':
-          params.admin = 'lot_image_sign_status'
-          params.status_image_sign = value ? '0' : '1'
-          break
-        case 'status_proofed':
-          params.admin = 'lot_proofed_status'
-          params.status_proofed = value ? '0' : '1'
-          break
-        case 'status_by_admin':
-          params.admin = 'lot_admin_status'
-          params.status_by_admin = value ? '0' : '1'
-          break
-        default:
-          break
+      case 'status_commission':
+        params.admin = 'lot_commission_status'
+        params.status_commission = value ? '0' : '1'
+        break
+      case 'status_image_sign':
+        params.admin = 'lot_image_sign_status'
+        params.status_image_sign = value ? '0' : '1'
+        break
+      case 'status_proofed':
+        params.admin = 'lot_proofed_status'
+        params.status_proofed = value ? '0' : '1'
+        break
+      case 'status_by_admin':
+        params.admin = 'lot_admin_status'
+        params.status_by_admin = value ? '0' : '1'
+        break
+      default:
+        break
       }
       LotServices.parkingLot(params).then(resp => {
+        console.log(resp)
         if (this.$route.name === 'unproofed' || this.$route.name === 'commissionproof') {
           this.$router.go()
         }

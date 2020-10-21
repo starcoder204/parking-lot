@@ -20,15 +20,15 @@ export function handleResponse (response) {
 export const xapi = () => {
   const headers = {
     'X-Requested-With': 'XMLHttpRequest',
-    Accept: 'application/json',
-    charset: 'UTF-8',
-    Authorization: 'Basic ' + appToken,
+    'Accept': 'application/json',
+    'charset': 'UTF-8',
+    'Authorization': `Basic ${  appToken}`,
     'Output-Format': 'JSON'
   }
 
   const xapi = axios.create({
     baseURL: apiBaseUrl,
-    headers: headers
+    headers
   })
 
   // Check expired token
