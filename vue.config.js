@@ -20,12 +20,15 @@ module.exports = {
         chunks: 'all'
       }
     }
+  },
+  devServer: {
+    host: 'dash.parkio.de',
+    port: 2222,
+    //https: true,
+    overlay: {
+      warnings: true,
+      errors: true
+    }
   }
-  // devServer: {
-  //   overlay: {
-  //     warnings: true,
-  //     errors: true
-  //   }
-  // }
 }
 
