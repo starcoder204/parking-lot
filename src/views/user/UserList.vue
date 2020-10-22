@@ -151,7 +151,7 @@ export default {
         },
         {
           headerName: 'Earned:',
-          field: null,
+          field: 'earned',
           width: 120
         },
         {
