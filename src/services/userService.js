@@ -1,7 +1,7 @@
 import { apiBaseUrl, appToken } from '@/config/settings'
 import { handleResponse } from './utils'
 
-export function userList (payload) {
+export function userApi (payload) {
   const requestOptions = {
     method: 'POST'
   }

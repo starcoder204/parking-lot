@@ -141,12 +141,12 @@ export default {
         },
         {
           headerName: 'Lots:',
-          field: null,
+          field: 'lots_count',
           width: 100
         },
         {
           headerName: 'Tickets:',
-          field: null,
+          field: 'tickets',
           width: 130
         },
         {
@@ -156,7 +156,7 @@ export default {
         },
         {
           headerName: 'Employees:',
-          field: null,
+          field: 'employees_count',
           width: 150
         },
         {
@@ -218,13 +218,10 @@ export default {
       this.gridApi.setQuickFilter(val)
     },
     freshUsers (users) {
-    //   users.forEach(lot => {
-    //     if (!lot.user_id) {
-    //       lot.user_id = {
-    //         username: null
-    //       }
-    //     }
-    //   })
+      users.forEach(user => {
+        user.lots_count = user.lots.length
+        user.employees_count = user.employees.length
+      })
       this.contacts = users
     }
   },
@@ -236,7 +233,7 @@ export default {
       per_page: pageSize,
       page: 1
     }
-    UserServices.userList(params).then(resp => {
+    UserServices.userApi(params).then(resp => {
       if (!resp.error) {
         this.freshUsers(resp.items)
       }

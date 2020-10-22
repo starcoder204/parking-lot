@@ -131,7 +131,7 @@ export default {
         },
         {
           headerName: 'Position:',
-          field: 'username',
+          field: 'position',
           width: 120
         },
         {
@@ -192,6 +192,9 @@ export default {
       this.gridApi.setQuickFilter(val)
     },
     freshUsers (admins) {
+      admins.forEach(user => {
+        user.position = user.role_id
+      })
       this.contacts = admins
     }
   },
@@ -203,7 +206,7 @@ export default {
       page: 1
     }
     this.$vs.loading()
-    UserServices.userList(params).then(resp => {
+    UserServices.userApi(params).then(resp => {
       if (!resp.error) {
         this.freshUsers(resp.items)
       }

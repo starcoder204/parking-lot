@@ -3,7 +3,7 @@ import {
 } from './lotService'
 
 import {
-  userList
+  userApi
 } from './userService'
 
 export const LotServices = {
@@ -11,5 +11,5 @@ export const LotServices = {
 }
 
 export const UserServices = {
-  userList
+  userApi
 }
